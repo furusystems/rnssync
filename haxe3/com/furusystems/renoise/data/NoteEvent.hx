@@ -10,6 +10,7 @@ class NoteEvent
 	public var note:Int;
 	public var volume:Int;
 	public var time:Float;
+	public var hasTriggered:Bool;
 	public function new() {
 		
 	}

@@ -20,13 +20,16 @@ class Parser
 	
 	static public function parse(data:String):Song {
 		var out = new Song();
-		trace("Parsing..");
 		var lines = data.split("\n");
 		for (i in 0...lines.length) 
 		{
 			parseLine(lines[i], out);
 		}
-		trace("Complete!");
+		#if debug
+		for (instr in out.instruments) {
+			trace(instr.name+", "+instr.events.length);
+		}
+		#end
 		return out;
 	}
 	
@@ -50,7 +53,6 @@ class Parser
 		var split = data.split("|");
 		i.index = Std.parseInt(split[0]);
 		i.name = split[1];
-		trace("Created instrument: " + i);
 		out.instruments[i.index] = i;
 	}
 	
@@ -59,21 +61,20 @@ class Parser
 		var split = data.split("|");
 		t.index = Std.parseInt(split[0]);
 		t.name = split[1];
-		trace("Created track: " + t);
 		out.tracks[t.index] = t;
 	}
 	
 	static function parseNote(data:String, out:Song):Void {
-		//track number|instrument number|seconds|MIDI note value (google it)|volume value,...
 		var n = new NoteEvent();
 		var split = data.split("|");
 		n.track = out.getTrack(Std.parseInt(split[0]));
-		n.track.events.push(n);
 		n.instrument = out.getInstrument(Std.parseInt(split[1]));
-		n.instrument.events.push(n);
 		n.time = Std.parseFloat(split[2]);
 		n.note = Std.parseInt(split[3]);
 		n.volume = Std.parseInt(split[4]);
+		
+		n.track.events.push(n);
+		n.instrument.events.push(n);
 		out.events.push(n);
 	}
 	
