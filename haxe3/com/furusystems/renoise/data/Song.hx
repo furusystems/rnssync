@@ -11,29 +11,20 @@ class Song
 	public var instruments:Array<Instrument>;
 	public var tracks:Array<Track>;
 	public var events:Array<NoteEvent>;
-	public function new() 
-	{
+	public function new() {
 		events = new Array<NoteEvent>();
 		tracks = new Array<Track>();
 		instruments = new Array<Instrument>();
 	}
 	
-	public function getTrack(idx:Int):Track 
-	{
-		for(t in tracks) {
-			if (t.index == idx) return t;
-		}
-		return null;
+	public inline function getTrack(idx:Int):Track {
+		return tracks[idx];
 	}
-	public function getInstrument(idx:Int):Instrument {
-		for(i in instruments) {
-			if (i.index == idx) return i;
-		}
-		return null;
+	public inline function getInstrument(idx:Int):Instrument {
+		return instruments[idx];
 	}
 	
-	public function toString():String 
-	{
+	public function toString():String {
 		return "[Song title=" + title + " bpm=" + bpm + " lpb=" + lpb + " instruments=" + instruments + " tracks=" + tracks + " events=" + events + "]";
 	}
 	
