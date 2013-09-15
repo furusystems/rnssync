@@ -9,6 +9,15 @@ import com.furusystems.renoise.data.Track;
  */
 class Parser 
 {
+	
+	static inline var INFO = "INFO";
+	static inline var NOTE = "NOTE";
+	static inline var TRACK = "TRACK";
+	static inline var INSTR = "INSTR";
+	static inline var TITLE = "title";
+	static inline var BPM = "bpm";
+	static inline var LPB = "lpb";
+	
 	static public function parse(data:String):Song {
 		var out:Song = new Song();
 		trace("Parsing..");
@@ -26,13 +35,13 @@ class Parser
 		if (line.indexOf("//") > -1) return;
 		var split = line.split(":");
 		switch(split[0]) {
-			case "INFO":
+			case INFO:
 				parseInfo(split[1], out);
-			case "NOTE":
+			case NOTE:
 				parseNote(split[1], out);
-			case "TRACK":
+			case TRACK:
 				parseTrack(split[1], out);
-			case "INSTR":
+			case INSTR:
 				parseInstr(split[1], out);
 		}
 	}
@@ -76,11 +85,11 @@ class Parser
 	{
 		var split = data.split("|");
 		switch(split[0].toLowerCase()) {
-			case "title":
+			case TITLE:
 				out.title = split[1];
-			case "bpm":
+			case BPM:
 				out.bpm = Std.parseInt(split[1]);
-			case "lpb":
+			case LPB:
 				out.lpb = Std.parseInt(split[1]); 
 		}
 	}
