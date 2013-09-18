@@ -25,12 +25,33 @@ class Parser
 		{
 			parseLine(lines[i], out);
 		}
+		for (i in out.instruments) {
+			rangeInstrument(i);
+		}
 		#if debug
 		for (instr in out.instruments) {
 			trace(instr.name+", "+instr.events.length);
 		}
 		#end
 		return out;
+	}
+	
+	static function rangeInstrument(i:Instrument):Void
+	{
+		var l:Int = 256;
+		var h:Int = -256;
+		for (e in i.events) {
+			if (e.note < l) {
+				l = e.note;
+			}
+			if (e.note > h) {
+				h = e.note;
+			}
+		}
+		for (e in i.events) {
+			if (l == h || h - l == 0) e.normalizedNote = 1;
+			else e.normalizedNote = (e.note-l) / (h - l);
+		}
 	}
 	
 	static function parseLine(line:String, out:Song):Void {

@@ -8,6 +8,7 @@ class NoteEvent
 	public var instrument:Instrument;
 	public var track:Track;
 	public var note:Int;
+	public var normalizedNote:Float;
 	public var volume:Int;
 	public var time:Float;
 	public var hasTriggered:Bool;
