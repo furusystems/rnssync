@@ -6,7 +6,7 @@ The purpose is to take a completed soundtrack for a game, written in Renoise, ex
 
 My primary use case is the use of music as a clock and even as level scripting for a time-sensitive game, such as a shoot'em up. "Silent" notes could be used to signify specific events, triggering enemy spawns and the like. This should make for some nice audio drama. Another use could be for visualizer effects for concerts and the like.
 
-A quick and dirty Flash demo exist [here](doomsday.no/dev/toys/sync).
+A quick and dirty Flash demo exist [here](http://doomsday.no/dev/toys/sync).
 
 Source is in Haxe and C#/Unity and behaves identically.
 
